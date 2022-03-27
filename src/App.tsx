@@ -1,8 +1,11 @@
-import React  from 'react';
+import React              from 'react';
+import { Routes, Route }  from 'react-router-dom';
 import Button             from './components/Button';
 import Nav                from './components/Nav';
+import FormSection        from './Sections/FormSection';
+import Questions          from './Sections/Questions';
 import logo               from './logo.svg'
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
 function App() {
   return (
     <>
@@ -11,7 +14,10 @@ function App() {
           Home
         </Button>
       </Nav>
-      
+      <Routes>
+        <Route path='/' element={ <FormSection /> } />
+        <Route path='/questions' element={ <Questions /> } />
+      </Routes>
     </>
   );
 }
