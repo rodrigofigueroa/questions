@@ -1,4 +1,5 @@
 
-export interface startI {
-  hello: string
+export interface playersObjectI {
+  playerName?: string,
+  playerNumber: number
 }

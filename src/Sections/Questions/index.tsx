@@ -1,6 +1,10 @@
 
 const Questions = () => {
-  return (<h2>Questions</h2>)
+  return (
+    <>
+    <h2>questions</h2>
+    </>
+  )
 }
 
 export default Questions
