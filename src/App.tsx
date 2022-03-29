@@ -6,7 +6,13 @@ import FormSection              from './Sections/FormSection'
 import Questions                from './Sections/Questions'
 import logo                     from './logo.svg'
 
-const Div = styled.div``
+const Div = styled.div`
+  @media screen and (max-width:480px){
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+`
 
 const Figure = styled.figure`
   width: 100px;
@@ -40,7 +46,9 @@ function App() {
         </Div>
       </Nav>
       <Routes>
-        <Route path='/' element={ <FormSection /> } />
+        <Route path='/' element={ <FormSection savePlayers={function (payload: any): {} {
+          throw new Error('Function not implemented.')
+        } } /> } />
         <Route path='/questions' element={ <Questions /> } />
       </Routes>
     </>

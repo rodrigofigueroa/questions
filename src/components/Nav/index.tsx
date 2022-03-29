@@ -23,6 +23,12 @@ const Nav = styled.nav`
       color:#fff;
     }
   }
+  @media screen and (max-width:480px){
+    flex-direction: column;
+    a{
+      margin-right: 0;
+    }
+  }
 `
 
 export default Nav

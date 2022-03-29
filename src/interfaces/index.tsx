@@ -1,14 +1,21 @@
 
 export interface playersObjectI {
-  playerName?: string,
+  namePlayer?: string,
   playerNumber: number
 }
 
 export interface playersReduxI {
-  savePlayers: ( payload: any ) => ({})
+  savePlayers: ( payload: any ) => ({}),
+  auth?: {
+    players: playersObjectI[]
+  }
 }
 
 export interface actionI {
   type: string,
   payload: any
+}
+
+export interface dataCssI {
+  dataCss?: string
 }
