@@ -4,11 +4,12 @@ import { BrowserRouter }                          from 'react-router-dom'
 import { createStore, compose, applyMiddleware }  from 'redux'
 import { Provider }                               from 'react-redux'
 import thunk                                      from 'redux-thunk'
+import { ToastContainer }                         from 'react-toastify';
 import reportWebVitals                            from './reportWebVitals'
 import rootReducer                                from './reducers'
 import App                                        from './App'
+import 'react-toastify/dist/ReactToastify.css'
 import './index.css'
-
 
 const composeEnhanced = ( window as any ).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(
@@ -22,6 +23,7 @@ ReactDOM.render(
       <BrowserRouter>
         <App />
       </BrowserRouter>
+      <ToastContainer />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
