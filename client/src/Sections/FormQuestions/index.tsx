@@ -1,7 +1,7 @@
 import { useState }         from "react"
 import axios                from 'axios'
 import { ButtonTypeEventT } from "../../interfaces"
-import { toast } from "react-toastify"
+import { toast }            from "react-toastify"
 
 const FormQuestions = () => {
   const [ userQuestion, setUserQuestion ] = useState<string>( '' )
