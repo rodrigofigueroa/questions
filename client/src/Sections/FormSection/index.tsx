@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState }                from "react"
-import { connect }                                    from 'react-redux'
-import { toast }                                      from "react-toastify"
-import { playersObjectI, playersReduxI }              from "../../interfaces"
-import { ButtonTypeEventT, questions, randomNumber }  from "./gameFunctions"
-import BtnBig                                         from "../../components/BtnBig"
-import Button                                         from "../../components/Button"
-import H2                                             from "../../components/H2"
-import H3                                             from "../../components/H3"
+import { useEffect, useRef, useState }                      from "react"
+import { connect }                                          from 'react-redux'
+import { toast }                                            from "react-toastify"
+import { ButtonTypeEventT, playersObjectI, playersReduxI }  from "../../interfaces"
+import { questions, randomNumber }                          from "./gameFunctions"
+import BtnBig                                               from "../../components/BtnBig"
+import Button                                               from "../../components/Button"
+import H2                                                   from "../../components/H2"
+import H3                                                   from "../../components/H3"
 
 
 

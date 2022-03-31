@@ -19,3 +19,5 @@ export interface actionI {
 export interface dataCssI {
   dataCss?: string
 }
+
+export type ButtonTypeEventT = React.MouseEvent<HTMLButtonElement>

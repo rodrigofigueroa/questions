@@ -4,6 +4,8 @@ import styled                   from 'styled-components'
 import Nav                      from './components/Nav'
 import FormSection              from './Sections/FormSection'
 import Questions                from './Sections/Questions'
+import FormQuestions            from './Sections/FormQuestions'
+import NotFound                 from './Sections/404'
 import logo                     from './logo.svg'
 
 const Div = styled.div`
@@ -50,6 +52,8 @@ function App() {
           throw new Error('Function not implemented.')
         } } /> } />
         <Route path='/questions' element={ <Questions /> } />
+        <Route path='/formulario' element={ <FormQuestions /> } />
+        <Route path='*' element={ <NotFound /> }/>
       </Routes>
     </>
   )
