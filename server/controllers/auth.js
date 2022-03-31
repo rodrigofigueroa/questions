@@ -1,2 +1,5 @@
 
-export const message = (req, res) => res.send(`Hello ${req.params.message}`)
+export const register_question = ( req, res ) => {
+  console.log( req.body )
+  res.send('Got it!')
+}

@@ -1,9 +1,9 @@
-import express      from 'express'
-import { message }  from '../controllers/auth'
+import express               from 'express'
+import { register_question } from '../controllers/auth'
 
 
 const routes = express.Router()
 
-routes.get("/:message", message )
+routes.post("/register-question", register_question )
 
 module.exports = routes

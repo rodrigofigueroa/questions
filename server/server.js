@@ -12,6 +12,8 @@ const app     = express(),
 app.use( cors() )
 app.use( morgan( 'dev' ) )
 require( 'dotenv' ).config()
+app.use( express.json())
+app.use( express.urlencoded({ extended: true }))
 
 mongoose
   .connect(process.env.DATABASE)
