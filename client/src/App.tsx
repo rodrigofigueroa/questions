@@ -1,4 +1,4 @@
-import React                    from 'react'
+import React, { useState }      from 'react'
 import { Routes, Route, Link }  from 'react-router-dom'
 import styled                   from 'styled-components'
 import Nav                      from './components/Nav'
@@ -27,8 +27,22 @@ const Img = styled.img`
   width: 150%;
   transform: translateX(-40px);
 `
+const BtnI = styled.button`
+  position: absolute;
+  right: 0;
+  bottom: -36px;
+  background-color: white;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border: none;
+`
 
 function App() {
+  const [ openNav, setOpenNav ] = useState('')
   return (
     <>
       <Nav>
@@ -46,6 +60,7 @@ function App() {
             Formulario
           </Link>
         </Div>
+        <BtnI className="fa fa-angle-up"  onClick={ () => { console.log('dsdsd') }}/>
       </Nav>
       <Routes>
         <Route path='/' element={ <FormSection savePlayers={function (payload: any): {} {
