@@ -39,34 +39,42 @@ const BtnI = styled.button`
   align-items: center;
   outline: none;
   border: none;
+  transition: .5s all ease;
 `
 
 function App() {
-  const [ openNav, setOpenNav ] = useState('')
+  const [ openNav, setOpenNav ] = useState( true )
   return (
     <>
-      <Nav>
+    
+      <Nav open={ openNav }>
         <Figure>
           <Img src="https://www.usmagazine.com/wp-content/uploads/2019/10/Kanye-West-Mental-Health.jpg" alt="" />
         </Figure>
         <Div>
           <Link to="/">
-            Home
+            ¡Juega!
           </Link>
-          <Link to="/questions">
+          <Link to="/preguntas">
             preguntas
           </Link>
           <Link to="/formulario">
             Formulario
           </Link>
+          <Link to="/perfil">
+            Perfil
+          </Link>
         </Div>
-        <BtnI className="fa fa-angle-up"  onClick={ () => { console.log('dsdsd') }}/>
       </Nav>
+      <div style={{ position: 'relative'}}>
+        <BtnI className={`fa ${ openNav ? 'fa-angle-up': 'fa-angle-down'}`}  
+          onClick={ () => { setOpenNav( !openNav )} }/>
+      </div>
       <Routes>
         <Route path='/' element={ <FormSection savePlayers={function (payload: any): {} {
           throw new Error('Function not implemented.')
         } } /> } />
-        <Route path='/questions' element={ <Questions /> } />
+        <Route path='/preguntas' element={ <Questions /> } />
         <Route path='/formulario' element={ <FormQuestions /> } />
         <Route path='*' element={ <NotFound /> }/>
       </Routes>

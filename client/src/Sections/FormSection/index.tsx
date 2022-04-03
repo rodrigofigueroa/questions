@@ -18,6 +18,7 @@ const FormSection = ( { savePlayers, auth }: playersReduxI ) => {
   const form                                  = useRef<HTMLFormElement>( null )
   const [ choosePlayer, setChoosePlayer ]     = useState<string | null>( '' )
   const [ chooseQuestion, setChooseQuestion ] = useState<string | null>( '' )
+  const [ randomNum, setRandomNum ]           = useState<number>( 0 )
 
 
   useEffect(() => {
@@ -73,11 +74,19 @@ const FormSection = ( { savePlayers, auth }: playersReduxI ) => {
     savePlayers( infoPlayers )
     setFlags({ ...flags, sec_3: false, sec_4: true })
   }  
+  const notRepeatedUser = ( numberOfPlayers: number ): number => {
+    let random: number = randomNumber( numberOfPlayers )
+    if( randomNum === random ){
+      return notRepeatedUser( numberOfPlayers )
+    }
+    setRandomNum( random )
+    return random
+  }
   const killPlayer = ( e: ButtonTypeEventT ) => {
     e.preventDefault()
     let numberOfPlayers = auth?.players ? auth?.players.length - 1 : 0,
         playerSelected  = auth?.players.length
-        ? auth?.players[randomNumber(numberOfPlayers)]?.namePlayer
+        ? auth?.players[ notRepeatedUser( numberOfPlayers ) ]?.namePlayer
         : "",
         chooseQuestion  = ( questions.length === 0 ) ? 0 : ( questions.length - 1 )
     setChoosePlayer( null )

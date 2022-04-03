@@ -20,4 +20,8 @@ export interface dataCssI {
   dataCss?: string
 }
 
+export interface openNav {
+  open: boolean
+}
+
 export type ButtonTypeEventT = React.MouseEvent<HTMLButtonElement>
