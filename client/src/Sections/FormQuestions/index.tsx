@@ -1,7 +1,7 @@
 import { useState }         from "react"
-import axios                from 'axios'
 import { ButtonTypeEventT } from "../../interfaces"
 import { toast }            from "react-toastify"
+import { register_question }  from "../../auth/auth"
 
 const FormQuestions = () => {
   const [ userQuestion, setUserQuestion ] = useState<string>( '' )
@@ -9,7 +9,7 @@ const FormQuestions = () => {
     e.preventDefault()
     // console.table({ userQuestion })
     try {
-      const resp = await axios.post( `${ process.env.REACT_APP_API }/register-question`, { userQuestion } )
+      const resp = await register_question( userQuestion )
       console.log('Registred ==>', resp )
       toast.success( '¡Gracias Tu pregunta fue guardada!' )
     } catch( err: any  ) {

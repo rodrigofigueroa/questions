@@ -7,7 +7,6 @@ const QuestionSchema = new Schema({
     type: String,
     trim: true,
     required: 'The Question is Required!',
-    unique: true,
     max: 50,
     min: 5,
   }

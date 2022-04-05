@@ -25,3 +25,5 @@ export interface openNav {
 }
 
 export type ButtonTypeEventT = React.MouseEvent<HTMLButtonElement>
+
+export type FormTypeEventT = React.FormEvent<HTMLFormElement>

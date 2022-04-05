@@ -1,4 +1,4 @@
-import React, { useState }      from 'react'
+import React, { Profiler, useState }      from 'react'
 import { Routes, Route, Link }  from 'react-router-dom'
 import styled                   from 'styled-components'
 import Nav                      from './components/Nav'
@@ -6,6 +6,7 @@ import FormSection              from './Sections/FormSection'
 import Questions                from './Sections/Questions'
 import FormQuestions            from './Sections/FormQuestions'
 import NotFound                 from './Sections/404'
+import Profile                  from './Sections/Profile'
 import logo                     from './logo.svg'
 
 const Div = styled.div`
@@ -76,6 +77,7 @@ function App() {
         } } /> } />
         <Route path='/preguntas' element={ <Questions /> } />
         <Route path='/formulario' element={ <FormQuestions /> } />
+        <Route path='/perfil' element={ <Profile /> } />
         <Route path='*' element={ <NotFound /> }/>
       </Routes>
     </>
