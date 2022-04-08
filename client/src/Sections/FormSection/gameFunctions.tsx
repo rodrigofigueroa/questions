@@ -257,7 +257,6 @@ export const questions = [
   "¿Si anduvieses desnudo por la calle te taparías la cara o los genitales? ",
   "¿Me dejas ver tus chats de Whatsapp? ",
   "¿Alguna vez te enamoraste de tu profesor? ",
-  "¿Has tenido algún gatillazo? ",
   "¿Qué edad tenía la persona de mayor edad con la que te has acostado? ",
   "¿Qué edad tenía la persona de menor edad con la que te has acostado? ",
   "¿Cuál fue tu peor cita? ",

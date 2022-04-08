@@ -185,11 +185,11 @@ const FormSection = ( { savePlayers, auth }: playersReduxI ) => {
             <section className="mt-5">
               <H2 className="mt-5 text-center">
                 {
-                  choosePlayer ? `Jugador Seleccionado es: ${ choosePlayer }` : 'Cargando...'
+                  choosePlayer ? `Jugador Seleccionado es: ${ choosePlayer }` : 'Da click en el botón...'
                 }
               </H2>
               <H3 className="mt-5">{
-                chooseQuestion ? chooseQuestion : 'Cargando...'
+                chooseQuestion ? chooseQuestion : 'Para elegir su muerte!...'
               }</H3>
             </section>
           </div>
