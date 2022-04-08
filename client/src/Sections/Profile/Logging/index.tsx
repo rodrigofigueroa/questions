@@ -1,9 +1,11 @@
-import { useState }       from "react"
-import { toast }          from "react-toastify"
-import { log_user }  from "../../../auth/auth"
-import { FormTypeEventT } from "../../../interfaces"
+import { useState }             from "react"
+import { connect }              from 'react-redux'
+import { log_user }             from "../../../auth/auth"
+import { toast }                from "react-toastify"
+import { FormTypeEventT, logI } from "../../../interfaces"
 
-const Logging = () => {
+
+const Logging = ( { log_in }: logI ) => {
   const [userEmail, setUserEmail] = useState("")
   const [userPassword, setUserPassword] = useState("")
 
@@ -16,8 +18,11 @@ const Logging = () => {
 
         console.log('Logging USER ===> ', resp )
         // Save on the LocalStorage
-  
+        window.localStorage.setItem( 'user', JSON.stringify( resp.data ) )
         // Save on the REDUX state
+        console.log( resp.data )
+        log_in( resp.data  )
+        toast.success( 'You are now logged!' )
       }
     } catch ( err: any ) {
       console.error( err )
@@ -68,4 +73,9 @@ const Logging = () => {
     </>
   )
 }
-export default Logging
+const mapDispatchToProps = ( dispatch: any ) => {
+  return {
+    log_in: ( payload: any ) => dispatch({ type: 'LOGGED_IN_USER', payload })
+  }
+}
+export default connect( null, mapDispatchToProps )( Logging )

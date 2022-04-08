@@ -27,3 +27,7 @@ export interface openNav {
 export type ButtonTypeEventT = React.MouseEvent<HTMLButtonElement>
 
 export type FormTypeEventT = React.FormEvent<HTMLFormElement>
+
+export interface logI {
+  log_in: ( payload: any ) => void
+}

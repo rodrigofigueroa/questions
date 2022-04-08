@@ -1,5 +1,6 @@
 import Question from "../models/question"
 import User     from '../models/auth'
+import jwt      from 'jsonwebtoken'
 
 export const register_question = async (req, res) => {
   const { userQuestion } = req.body
@@ -55,11 +56,24 @@ export const loging = async ( req, res ) => {
     let user = await User.findOne({ userEmail }).exec()
     if( !user ) return res.status( 400 ).send( 'Sorry but there isnt any email' )
     console.log( user )
-    user.comparePassword( userPassword, function( err, match ){
-      console.log( 'ERROR comparing your password', err );
-      if( !match || err ) return res.status( 400 ).send( 'Sorry but you password is incorrect!' )
-      console.log('comapring was successfull' )
-      res.json({ ok : true })
+    user.comparePassword(userPassword, function (err, match) {
+      console.log("ERROR comparing your password", err)
+      if (!match || err)
+        return res.status(400).send("Sorry but you password is incorrect!")
+      console.log("comapring was successfull")
+      let token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+        expiresIn: "7d",
+      })
+      res.json({
+        token,
+        user: {
+          _id: user._id,
+          userName: user.userName,
+          userEmail: user.userEmail,
+          createdAt: user.createdAt,
+          updatedAt: user.updatedAt
+        }
+      })
     })
   } catch ( err ) {
     console.error( err )
