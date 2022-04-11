@@ -14,7 +14,7 @@ const Nav = styled.nav<openNav>`
   justify-content: space-between;
   position: relative;
   transition: all 301.553ms ease 0ms;
-  a {
+  a, a:not([href=""]) {
     padding: 5px 15px;
     border: 2px solid #61a4bc;
     border-radius: 5px;
@@ -22,6 +22,7 @@ const Nav = styled.nav<openNav>`
     transition: all 249.625ms ease 0ms;
     margin-right: 20px;
     text-decoration: none;
+    cursor: pointer;
     &:hover {
       background: #61a4bc;
       color: #fff;

@@ -18,7 +18,7 @@ const Logging = ( { log_in }: logI ) => {
 
         console.log('Logging USER ===> ', resp )
         // Save on the LocalStorage
-        window.localStorage.setItem( 'user', JSON.stringify( resp.data ) )
+        window.localStorage.setItem( 'auth', JSON.stringify( resp.data ) )
         // Save on the REDUX state
         console.log( resp.data )
         log_in( resp.data  )

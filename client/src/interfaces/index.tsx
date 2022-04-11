@@ -28,6 +28,8 @@ export type ButtonTypeEventT = React.MouseEvent<HTMLButtonElement>
 
 export type FormTypeEventT = React.FormEvent<HTMLFormElement>
 
+export type ATypeEventT = React.MouseEvent<HTMLElement | Element >
+
 export interface logI {
   log_in: ( payload: any ) => void
 }

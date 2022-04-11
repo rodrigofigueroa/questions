@@ -1,11 +1,21 @@
 import { actionI } from "../interfaces"
 
-const initialValue = {}
+let initialValue = {
+  log: {}
+}
+
+if( window.localStorage.getItem( 'auth' ) ){
+  initialValue.log = JSON.parse( ( window.localStorage.getItem( 'auth' ) as string )  )
+} else {
+  initialValue.log = {}
+}
 
 export const reducerFirst = ( state = initialValue, action: actionI ) => {
   switch( action.type ){
     case 'LOGGED_IN_USER':
-    return { ...state, ...action.payload }
+    return { ...state, log: { ...action.payload }}
+    case 'LOG_OUT_USER':
+      return { ...state, log: { ...action.payload }}
     case 'PLAYERS_TO_PLAY':
     return { ...state, players: [ ...action.payload ]}
     default:
