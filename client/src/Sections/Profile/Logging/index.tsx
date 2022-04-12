@@ -3,9 +3,11 @@ import { connect }              from 'react-redux'
 import { log_user }             from "../../../auth/auth"
 import { toast }                from "react-toastify"
 import { FormTypeEventT, logI } from "../../../interfaces"
+import { useNavigate }          from 'react-router-dom';
 
 
 const Logging = ( { log_in }: logI ) => {
+  const history = useNavigate()
   const [userEmail, setUserEmail] = useState("")
   const [userPassword, setUserPassword] = useState("")
 
@@ -23,6 +25,7 @@ const Logging = ( { log_in }: logI ) => {
         console.log( resp.data )
         log_in( resp.data  )
         toast.success( 'You are now logged!' )
+        history( '/' )
       }
     } catch ( err: any ) {
       console.error( err )

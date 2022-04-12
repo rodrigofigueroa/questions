@@ -11,6 +11,16 @@ export interface playersReduxI {
   }
 }
 
+export interface logUserI {
+  auth?: {
+    log?: {
+      token?: string,
+      user?: {}
+    }
+  },
+  logOutUser: ( payload: any ) => void
+}
+
 export interface actionI {
   type: string,
   payload: any

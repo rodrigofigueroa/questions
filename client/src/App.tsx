@@ -1,15 +1,14 @@
-import { useEffect, useState }             from 'react'
-import { Routes, Route, Link }  from 'react-router-dom'
-import { connect }              from 'react-redux'
-import styled                   from 'styled-components'
-import Nav                      from './components/Nav'
-import FormSection              from './Sections/FormSection'
-import Questions                from './Sections/Questions'
-import FormQuestions            from './Sections/FormQuestions'
-import NotFound                 from './Sections/404'
-import Profile                  from './Sections/Profile'
-import logo                     from './logo.svg'
-import { ATypeEventT } from './interfaces'
+import { useEffect, useState }              from 'react'
+import { Routes, Route, Link, useNavigate } from 'react-router-dom'
+import { connect }                          from 'react-redux'
+import styled                               from 'styled-components'
+import Nav                                  from './components/Nav'
+import FormSection                          from './Sections/FormSection'
+import Questions                            from './Sections/Questions'
+import FormQuestions                        from './Sections/FormQuestions'
+import NotFound                             from './Sections/404'
+import Profile                              from './Sections/Profile'
+import { ATypeEventT, logUserI }            from './interfaces'
 
 const Div = styled.div`
   @media screen and (max-width:480px){
@@ -44,30 +43,24 @@ const BtnI = styled.button`
   border: none;
   transition: .5s all ease;
 `
-interface logUserI {
-  auth?: {
-    log?: {
-      token?: string,
-      user?: {}
-    }
-  },
-  logOutUser: ( payload: any ) => void
-}
 function App( { logOutUser, auth }: logUserI ) {
+  const history = useNavigate()
   const [ openNav, setOpenNav ] = useState( true )
-  const [ logOrNot, setLogOrNot ] = useState( true )
-
+  const [ logOrNot, setLogOrNot ] = useState<boolean>( true )
+  
   const logOut = ( e: ATypeEventT ) => {
     e.preventDefault()
     console.log( e )
     window.localStorage.removeItem( 'auth' )
     logOutUser( null )
+    history( '/' )
   }
+
   useEffect(() => {
     if( !auth?.log?.hasOwnProperty( 'user' ) ){
-      setLogOrNot( !logOrNot )
+      setLogOrNot( true )
     }else{
-      setLogOrNot( !logOrNot )
+      setLogOrNot( false )
     }
   }, [ auth ])
   return (
@@ -84,7 +77,7 @@ function App( { logOutUser, auth }: logUserI ) {
           <Link to="/preguntas">preguntas</Link>
           <Link to="/formulario">Formulario</Link>
           { logOrNot && <Link to="/perfil">Perfil</Link> }
-          { !logOrNot && <a onClick={logOut}>Cerrar</a> }
+          { !logOrNot && <a onClick={ logOut }>Cerrar</a> }
         </Div>
       </Nav>
       <div style={{ position: "relative" }}>
@@ -114,7 +107,7 @@ function App( { logOutUser, auth }: logUserI ) {
     </>
   )
 }
-const mapStateToProps = ( state: any ) => state
+const mapStateToProps = ( state: any ) => { console.log(state );return state}
 const mapDispatchToProps = ( dispatch: any  ) => {
   return {
     logOutUser: ( payload: null ) => dispatch({ type: 'LOG_OUT_USER', payload })

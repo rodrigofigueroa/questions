@@ -3,7 +3,7 @@ import Logging      from "./Logging"
 import Registered   from "./Registered"
 
 
-const Profile = ( ) => {  
+const Profile = () => {  
   const [ logReg, setLogReg ] = useState<boolean>( true )
   return (
     <>
