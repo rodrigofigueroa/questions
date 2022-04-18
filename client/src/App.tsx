@@ -9,6 +9,7 @@ import FormQuestions                        from './Sections/FormQuestions'
 import NotFound                             from './Sections/404'
 import Profile                              from './Sections/Profile'
 import { ATypeEventT, logUserI }            from './interfaces'
+import PrivateRoute                         from './components/PrivateRoute'
 
 const Div = styled.div`
   @media screen and (max-width:480px){
@@ -76,7 +77,7 @@ function App( { logOutUser, auth }: logUserI ) {
           <Link to="/">¡Juega!</Link>
           <Link to="/preguntas">preguntas</Link>
           <Link to="/formulario">Formulario</Link>
-          { logOrNot && <Link to="/perfil">Perfil</Link> }
+          <Link to="/perfil">Perfil</Link>
           { !logOrNot && <a onClick={ logOut }>Cerrar</a> }
         </Div>
       </Nav>
@@ -99,10 +100,18 @@ function App( { logOutUser, auth }: logUserI ) {
             />
           }
         />
-        <Route path="/preguntas" element={<Questions />} />
-        <Route path="/formulario" element={<FormQuestions />} />
-        <Route path="/perfil" element={<Profile />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="/preguntas" element={ <Questions /> } />
+        <Route path="/formulario" element={ <FormQuestions /> } />
+        <Route path="/perfil" element={ 
+          <PrivateRoute auth={{
+            log: {
+              token: undefined
+            }
+          }}>
+            <Profile /> 
+          </PrivateRoute>
+        }/>        
+        <Route path="*" element={ <NotFound /> } />
       </Routes>
     </>
   )

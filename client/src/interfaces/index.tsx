@@ -43,3 +43,11 @@ export type ATypeEventT = React.MouseEvent<HTMLElement | Element >
 export interface logI {
   log_in: ( payload: any ) => void
 }
+export interface PrivateRouteI {
+  children: any,
+  auth: {
+    log: {
+      token?: string
+    }
+  }
+}
