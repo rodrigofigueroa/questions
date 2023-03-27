@@ -96,8 +96,9 @@ function App( { logOutUser, auth }: logUserI ) {
             <FormSection
               savePlayers={function (payload: any): {} {
                 throw new Error("Function not implemented.")
-              }}
-            />
+              } } saveSections={function (payload: any): {} {
+                throw new Error('Function not implemented.')
+              } }            />
           }
         />
         <Route path="/preguntas" element={ <Questions /> } />

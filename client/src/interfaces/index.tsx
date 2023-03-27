@@ -4,10 +4,14 @@ export interface playersObjectI {
   playerNumber: number
 }
 
+export interface sectionI { sec_1: boolean, sec_2: boolean, sec_3: boolean, sec_4: boolean }
+
 export interface playersReduxI {
   savePlayers: ( payload: any ) => ({}),
+  saveSections: ( payload: any ) => ({}),
   auth?: {
     players: playersObjectI[]
+    sectionQ?: sectionI
   }
 }
 

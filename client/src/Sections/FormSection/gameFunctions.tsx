@@ -287,5 +287,6 @@ export const questions = [
 ]
 
 export const randomNumber = ( max: number ): number => {
+  // Other aproach is Math.round( max * Math.random() + 1)
   return Math.round( ( max - 0 ) * ( Math.random() + 0 ) )
 }

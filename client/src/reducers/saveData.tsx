@@ -5,8 +5,8 @@ let initialValue = {
 }
 
 if( window.localStorage.getItem( 'auth' ) ){
-  initialValue.log = JSON.parse( ( window.localStorage.getItem( 'auth' ) as string )  )
-} else {
+  initialValue = { ...JSON.parse( ( window.localStorage.getItem( 'auth' ) as string )  )}
+} else {  
   initialValue.log = {}
 }
 
@@ -18,6 +18,8 @@ export const reducerFirst = ( state = initialValue, action: actionI ) => {
       return { ...state, log: { ...action.payload }}
     case 'PLAYERS_TO_PLAY':
     return { ...state, players: [ ...action.payload ]}
+    case 'SECTION_QUESTIONS':
+    return { ...state, sectionQ: { ...action.payload }}
     default:
       return state
   }

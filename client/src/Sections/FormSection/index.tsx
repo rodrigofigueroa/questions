@@ -10,7 +10,7 @@ import H3                                                   from "../../componen
 
 
 
-const FormSection = ( { savePlayers, auth }: playersReduxI ) => {
+const FormSection = ( { savePlayers, auth, saveSections }: playersReduxI ) => {
   const [ playersState, setPlayersState ]     = useState<playersObjectI[]>([])
   const [ playersNumber, setPlayersNumber ]   = useState( 0 )
   const [ inputElm, setInputElm ]             = useState<JSX.Element[]>([])
@@ -19,22 +19,40 @@ const FormSection = ( { savePlayers, auth }: playersReduxI ) => {
   const [ choosePlayer, setChoosePlayer ]     = useState<string | null>( '' )
   const [ chooseQuestion, setChooseQuestion ] = useState<string | null>( '' )
   const [ randomNum, setRandomNum ]           = useState<number>( 0 )
+  const [ localS, setLocalS ]                 = useState<any>({})
 
 
   useEffect(() => {
     setPlayersNumber(  playersState.length )
   }, [ playersState, inputElm, choosePlayer ] )
 
+  useEffect(() => {
+    let dataStorage = localS
+    if( localStorage.getItem( 'auth' )?.length === undefined ){
+      localStorage.setItem( 'auth', JSON.stringify({ sectionQ: {...flags} }))
+      return 
+    } else {
+      localStorage.setItem( 'auth', JSON.stringify( { ...auth, sectionQ: { ...flags } } ))
+      dataStorage = JSON.parse( ( localStorage.getItem( 'auth' ) as any ) )
+      setLocalS( dataStorage )
+    }
+  }, [playersState, flags, chooseQuestion ])
+
   const addPlayer = ( e: ButtonTypeEventT ) => {
     e.preventDefault()
     let addingArray = [ ...playersState, { playerName: '', playerNumber: playersState.length + 1 }]
     setPlayersState( addingArray )
+    
   }
   const deletePlayers = ( e: ButtonTypeEventT ) => {
     e.preventDefault()
     let addingArray = [ ...playersState ]
     addingArray.pop()
     setPlayersState( addingArray )
+  }
+  const addSectionsToStateAndRedux = ( flags: any ) => {
+    setFlags({...flags })
+    saveSections({ ...flags })
   }
   const stepToChooseName = ( e: ButtonTypeEventT ) => {
     e.preventDefault()
@@ -54,7 +72,7 @@ const FormSection = ( { savePlayers, auth }: playersReduxI ) => {
         </div>
       )
     })
-    setFlags({...flags, sec_1: false, sec_2: false, sec_3: true  })
+    addSectionsToStateAndRedux( {...flags, sec_1: false, sec_2: false, sec_3: true  } )
     setInputElm( changeToReact )
   }
   const playGame = ( e: ButtonTypeEventT ) => {
@@ -72,7 +90,7 @@ const FormSection = ( { savePlayers, auth }: playersReduxI ) => {
       }
     }
     savePlayers( infoPlayers )
-    setFlags({ ...flags, sec_3: false, sec_4: true })
+    addSectionsToStateAndRedux({ ...flags, sec_3: false, sec_4: true })
   }  
   const notRepeatedUser = ( numberOfPlayers: number ): number => {
     let random: number = randomNumber( numberOfPlayers )
@@ -101,14 +119,13 @@ const FormSection = ( { savePlayers, auth }: playersReduxI ) => {
   const returnToAddPlayers = ( e: ButtonTypeEventT ) => {
     e.preventDefault()
     console.log( e )
-    setFlags({...flags, sec_1: true, sec_2: true, sec_3: false  })
+    addSectionsToStateAndRedux({...flags, sec_1: true, sec_2: true, sec_3: false  })
   }
-
   return (
     <>
       <div className="container py-5">
         <div className="row d-flex flex-column">
-          <div className={`col-12 ${!flags.sec_1 ? "d-none" : ""}`}>
+          <div className={`col-12 ${ !localS.sectionQ ? !flags.sec_1 && "d-none" : !flags.sec_1 && "d-none" }`}>
             <section className="d-flex flex-column flex-wrap justify-content-center align-items-center">
               <H2 className="text-center">Da click en el botón para agregar jugadores</H2>
               <div className="d-flex mt-3 flex-column flex-md-row justify-content-center align-items-center mt-5">
@@ -126,7 +143,7 @@ const FormSection = ( { savePlayers, auth }: playersReduxI ) => {
           </div>
           <div
             className={`col-12 d-flex flex-column justify-content-center align-items-center ${
-              !flags.sec_2 ? "d-none" : ""
+               !localS.sectionQ ? !flags.sec_2 && "d-none": !flags.sec_2 && "d-none"
             }`}
           >
             {playersNumber >= 2 ? (
@@ -147,7 +164,7 @@ const FormSection = ( { savePlayers, auth }: playersReduxI ) => {
           </div>
           <div
             className={`col-12 col-md-4 align-self-center ${
-              !flags.sec_3 ? "d-none" : ""
+               !localS.sectionQ ? !flags.sec_3 && "d-none" : !flags.sec_3 && "d-none"
             }`}
           >
             <form
@@ -176,7 +193,7 @@ const FormSection = ( { savePlayers, auth }: playersReduxI ) => {
           </div>
           <div
             className={`col-12 d-flex align-items-center flex-column ${
-              !flags.sec_4 ? "d-none" : ""
+               !localS.sectionQ ? !flags.sec_4 && "d-none" : !flags.sec_4 && "d-none"
             }`}
           >
             <BtnBig onClick={killPlayer}>
@@ -201,6 +218,8 @@ const FormSection = ( { savePlayers, auth }: playersReduxI ) => {
 const mapDispatchToProps = ( dispatch: any ) => ({
   savePlayers: ( payload: object ) =>
     dispatch({ type: "PLAYERS_TO_PLAY", payload }),
+  saveSections: ( payload: object ) => 
+    dispatch({ type: 'SECTION_QUESTIONS', payload })
 })
 const mapStateToProps = ( state: any ) =>  state 
 export default connect( mapStateToProps, mapDispatchToProps  )( FormSection )
