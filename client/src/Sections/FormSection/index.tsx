@@ -20,6 +20,7 @@ const FormSection = ( { savePlayers, auth, saveSections }: playersReduxI ) => {
   const [ chooseQuestion, setChooseQuestion ] = useState<string | null>( '' )
   const [ randomNum, setRandomNum ]           = useState<number>( 0 )
   const [ localS, setLocalS ]                 = useState<any>({})
+  const [ loading, setLoading  ]              = useState<boolean>( false )
 
 
   useEffect(() => {
@@ -115,6 +116,7 @@ const FormSection = ( { savePlayers, auth, saveSections }: playersReduxI ) => {
     setTimeout(() => {
       setChooseQuestion( questions[ randomNumber( chooseQuestion )] )
     }, 1000 )
+    setLoading( true )
   }
   const returnToAddPlayers = ( e: ButtonTypeEventT ) => {
     e.preventDefault()
@@ -124,26 +126,38 @@ const FormSection = ( { savePlayers, auth, saveSections }: playersReduxI ) => {
   const resetGame = ( e: React.MouseEvent ) => {
     e.preventDefault()
     addSectionsToStateAndRedux({ ...flags, sec_1: true, sec_2: true, sec_3: false, sec_4: false })
+    setLoading( false )
+    setChoosePlayer( null )
+    setChooseQuestion( null )
   }
   return (
     <>
       <div className="container py-5">
         <div className="row d-flex flex-column">
           <div className={`col-12 ${ !localS.sectionQ ? !flags.sec_1 && "d-none" : !flags.sec_1 && "d-none" }`}>
+            
             <section className="d-flex flex-column flex-wrap justify-content-center align-items-center">
+              
               <H2 className="text-center">Da click en el botón para agregar jugadores</H2>
+              
               <div className="d-flex mt-3 flex-column flex-md-row justify-content-center align-items-center mt-5">
+              
                 <Button className="btn btn-light mx-4" onClick={addPlayer}>
                   Agrega Jugadores +
                 </Button>
+              
                 <H2 className="my-4">
                   {playersNumber} {playersNumber > 1 ? "Jugadores" : "Jugador"}
                 </H2>
+              
                 <Button className="btn btn-danger mx-4" onClick={deletePlayers}>
                   Elimina Jugadores -
                 </Button>
+
               </div>
+
             </section>
+
           </div>
           <div
             className={`col-12 d-flex flex-column justify-content-center align-items-center ${
@@ -206,11 +220,11 @@ const FormSection = ( { savePlayers, auth, saveSections }: playersReduxI ) => {
             <section className="mt-5">
               <H2 className="mt-5 text-center">
                 {
-                  choosePlayer ? `Jugador Seleccionado es: ${ choosePlayer }` : 'Da click en el botón...'
+                  choosePlayer ? `Jugador Seleccionado es: ${ choosePlayer }` : !loading ? 'Da click en el botón...' : 'Cargando Pregunta...'
                 }
               </H2>
               <H3 className="mt-5">{
-                chooseQuestion ? chooseQuestion : 'Para elegir su muerte!...'
+                chooseQuestion ? chooseQuestion :  !loading ? 'Para elegir su muerte!...' : '💀 💀 💀 💀'
               }</H3>
             </section>
             <button className="btn btn-light mt-3" type="button" onClick={ resetGame }>
