@@ -121,6 +121,10 @@ const FormSection = ( { savePlayers, auth, saveSections }: playersReduxI ) => {
     console.log( e )
     addSectionsToStateAndRedux({...flags, sec_1: true, sec_2: true, sec_3: false  })
   }
+  const resetGame = ( e: React.MouseEvent ) => {
+    e.preventDefault()
+    addSectionsToStateAndRedux({ ...flags, sec_1: true, sec_2: true, sec_3: false, sec_4: false })
+  }
   return (
     <>
       <div className="container py-5">
@@ -192,7 +196,7 @@ const FormSection = ( { savePlayers, auth, saveSections }: playersReduxI ) => {
             </form>
           </div>
           <div
-            className={`col-12 d-flex align-items-center flex-column ${
+            className={`col-12 d-flex align-items-center flex-column position-relative ${
                !localS.sectionQ ? !flags.sec_4 && "d-none" : !flags.sec_4 && "d-none"
             }`}
           >
@@ -209,6 +213,9 @@ const FormSection = ( { savePlayers, auth, saveSections }: playersReduxI ) => {
                 chooseQuestion ? chooseQuestion : 'Para elegir su muerte!...'
               }</H3>
             </section>
+            <button className="btn btn-light mt-3" type="button" onClick={ resetGame }>
+              Volver a empezar el juego
+            </button>
           </div>
         </div>
       </div>
