@@ -16,6 +16,7 @@ const Div = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
+    overflow: auto;
   }
 `
 
@@ -73,7 +74,7 @@ function App( { logOutUser, auth }: logUserI ) {
             alt=""
           />
         </Figure>
-        <Div>
+        <Div >
           <Link to="/">¡Juega!</Link>
           <Link to="/preguntas">preguntas</Link>
           <Link to="/formulario">Formulario</Link>
