@@ -75,10 +75,10 @@ function App( { logOutUser, auth }: logUserI ) {
           />
         </Figure>
         <Div >
-          <Link to="/">¡Juega!</Link>
-          <Link to="/preguntas">preguntas</Link>
-          <Link to="/formulario">Formulario</Link>
-          <Link to="/perfil">Perfil</Link>
+          <Link to="/questions">¡Juega!</Link>
+          <Link to="/questions/preguntas">preguntas</Link>
+          <Link to="/questions/formulario">Formulario</Link>
+          <Link to="/questions/perfil">Perfil</Link>
           { !logOrNot && <a onClick={ logOut }>Cerrar</a> }
         </Div>
       </Nav>
