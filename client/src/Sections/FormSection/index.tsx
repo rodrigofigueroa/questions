@@ -224,7 +224,7 @@ const FormSection = ( { savePlayers, auth, saveSections }: playersReduxI ) => {
                 }
               </H2>
               <H3 className="mt-5">{
-                chooseQuestion ? chooseQuestion :  !loading ? 'Para elegir su muerte!...' : '💀 💀 💀 💀'
+                chooseQuestion ? chooseQuestion :  !loading ? 'Para elegir la pregunta' : '💀 💀 💀 💀'
               }</H3>
             </section>
             <button className="btn btn-light mt-3" type="button" onClick={ resetGame }>
