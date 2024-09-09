@@ -92,7 +92,7 @@ function App( { logOutUser, auth }: logUserI ) {
       </div>
       <Routes>
         <Route
-          path="/"
+          path="/questions"
           element={
             <FormSection
               savePlayers={function (payload: any): {} {
@@ -102,9 +102,9 @@ function App( { logOutUser, auth }: logUserI ) {
               } }            />
           }
         />
-        <Route path="/preguntas" element={ <Questions /> } />
-        <Route path="/formulario" element={ <FormQuestions /> } />
-        <Route path="/perfil" element={ 
+        <Route path="/questions/preguntas" element={ <Questions /> } />
+        <Route path="/questions/formulario" element={ <FormQuestions /> } />
+        <Route path="/questions/perfil" element={ 
           <PrivateRoute auth={{
             log: {
               token: undefined
